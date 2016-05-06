@@ -1,8 +1,0 @@
-com\proyectocanjes\form\User.class
-com\proyectocanjes\dao\LoginDAO.class
-com\proyectocanjes\controllers\LoginController.class
-com\proyectocanjes\dao\LoginDAOImpl.class
-com\proyectocanjes\model\User.class
-com\proyectocanjes\form\LoginForm.class
-com\proyectocanjes\service\LoginService.class
-com\proyectocanjes\service\LoginServiceImpl.class
