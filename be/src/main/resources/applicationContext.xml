@@ -11,16 +11,20 @@
     <!-- Base package for checking the annoted classes -->
       <context:component-scan base-package="com.proyectocanjes"></context:component-scan>
 
-      <!-- Configure JDBC Connection-->
-      <bean id="dataSource"
-            class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-            <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-            <property name="url" value="jdbc:mysql://localhost:3306/proyectocanje"/>
-            <property name="username" value="root" />
-            <property name="password" value="root" />
-      </bean>
+    <bean  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+      <property name="location" value="classpath:/db.properties" />
+    </bean>
 
-      <!-- Configure Hibernate 4 Session Facotry -->
+      <!-- Configure JDBC Connection-->     
+     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    	<property name="driverClassName" value="${db.driver}" />
+    	<property name="url" value="${db.url}" />
+    	<property name="username" value="${db.username}" />
+    	<property name="password" value="${db.password}" />
+  	</bean>      
+      
+
+      <!-- Configure Hibernate 4 Session Factory -->
       <bean id="sessionFactory"
             class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 
@@ -30,15 +34,11 @@
 
 			<property name="hibernateProperties">
 			  <props>
-					<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-					<prop key="hibernate.show_sql">true</prop>
+					<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+					<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 			  </props>
 			</property>
-			<property name="annotatedClasses">
-			<list>
-				  <value>com.proyectocanjes.model.User</value> <!-- Entity classes-->
-			</list>
-			</property>
+			<property name="annotatedClasses" value="com.proyectocanjes.model.User" />
 
       </bean>
 </beans>
